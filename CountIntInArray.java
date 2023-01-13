@@ -28,7 +28,8 @@ public class CountIntInArray {
         int nonZeroIndex = 0;
 
         //find the non-zero value and break the loop with the information
-        for (int i : intArray) {
+        for (int i = 0; i < size; i++) {
+
             if (intArray[i] != 0) {
                 intValue = intArray[i];
                 nonZeroIndex = i;
@@ -37,20 +38,19 @@ public class CountIntInArray {
         }
 
         // continue the loop from where the previous loop left off, 
-        // saving 1 operation per non-zero value
-        int intCount = 1;
-        for (int i = nonZeroIndex; i < size; i++) {
-            if (intArray[i] != 0) {
-                intCount ++;
-            }
+        // and taking the sum of the remaining values
+        int intTotal = intValue;
+        for (int j = nonZeroIndex + 1; j < size; j++) {
+            intTotal += intArray[j];
         }
-        
+
         // Return a result class containing the information in a descriptive way
-        return new IntResult(intCount, intValue);
+        // Find intCount by dividing the sum by the value
+        return new IntResult(intTotal / intValue, intValue);
     }
 
     public static void main(String args[]) {
-        Integer[] exampleInt = { 0, 0, 3, 3, 0, 0};
+        Integer[] exampleInt = { 3, 3, 3, 3, 0, 3};
 
         IntResult exampleArrayInt = countIntInArray(exampleInt);
 
